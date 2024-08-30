@@ -41,7 +41,7 @@ public class Player : MonoBehaviour
     
     public float comboResetTime = 1.0f;
 
-    private PlayerFSM playerFsm;
+    public PlayerFSM playerFsm;
     private AttackEvent attackEvent;
 
     public PlayerState.PlayerState playerState;
@@ -95,16 +95,22 @@ public class Player : MonoBehaviour
     public void HandleSkill()
     {
         //스킬은 어떤 상황에서든 발동 된다(쿨 제외)
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.A))
         {
             playerFsm.ChangeState(new SkillState(this, 0));
         }
         
         
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(KeyCode.S))
         {
             playerFsm.ChangeState(new SkillState(this, 1));
         }
+        
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            playerFsm.ChangeState(new ShieldDashState(this));
+        }
+
         
     }
 

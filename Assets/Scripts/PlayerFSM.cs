@@ -9,6 +9,7 @@ namespace  PlayerState
     
     public class PlayerFSM: MonoBehaviour
     {
+        
         public BaseState state;
         
         public void ChangeState(BaseState nextState)
@@ -21,6 +22,7 @@ namespace  PlayerState
             state = nextState;
             state.OnStateEnter();
         }
+    
 
         private void Update()
         {
@@ -284,6 +286,8 @@ namespace  PlayerState
             Debug.Log("ShieldDash");
             animationHash = Animator.StringToHash("ShieldDash");
             _player.animator.Play(animationHash);
+            
+            
         }
 
         public override void OnStateUpdate()

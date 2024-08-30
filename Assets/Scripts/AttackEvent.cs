@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class AttackEvent : MonoBehaviour
 {
+    public PollingManager shieldEffectPollingManager;
+    
     public float power = 1f;
     private Rigidbody rb;
     public Trail trail;
@@ -18,6 +20,8 @@ public class AttackEvent : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        
+        shieldEffectPollingManager = PollingManagerParent.Instance.shieldEffectPollingManager;
     }
 
     public void EnableTrail()
@@ -45,6 +49,8 @@ public class AttackEvent : MonoBehaviour
 
     public void ShieldDash()
     {
+        ShieldEffect obj = (ShieldEffect)shieldEffectPollingManager.CreateObject();
+        obj.Active(transform);
         StartCoroutine(ForceRoutine(ShieldDashPower, ShieldDashDuaration));
     }
 
