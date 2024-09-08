@@ -4,9 +4,8 @@ using System.Collections.Generic;
 using Tiny;
 using UnityEngine;
 
-public class AttackEvent : MonoBehaviour
+public class AnimationEvent : MonoBehaviour
 {
-    public PollingManager shieldEffectPollingManager;
     
     public float power = 1f;
     private Rigidbody rb;
@@ -20,8 +19,6 @@ public class AttackEvent : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-        
-        shieldEffectPollingManager = PollingManagerParent.Instance.shieldEffectPollingManager;
     }
 
     public void EnableTrail()
@@ -49,15 +46,23 @@ public class AttackEvent : MonoBehaviour
 
     public void ShieldDash()
     {
-        ShieldEffect obj = (ShieldEffect)shieldEffectPollingManager.CreateObject();
+        ShieldEffect obj = EffectManager.Instance.CreateShieldEffect();
         obj.Active(transform);
         StartCoroutine(ForceRoutine(ShieldDashPower, ShieldDashDuaration));
     }
 
+
+    public void WalkDustEffect()
+    {
+        var obj = EffectManager.Instance.CreateWalkDustEffect();
+        obj.Active(transform);
+    }
+    
     private void SetForce(float pow)
     {
         StartCoroutine(ForceRoutine(pow, 0.1f));
     }
+    
     
     private IEnumerator ForceRoutine(float pow, float duration)
     {

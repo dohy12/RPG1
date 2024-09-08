@@ -42,7 +42,7 @@ public class Player : MonoBehaviour
     public float comboResetTime = 1.0f;
 
     public PlayerFSM playerFsm;
-    private AttackEvent attackEvent;
+    private AnimationEvent animationEvent;
 
     public PlayerState.PlayerState playerState;
 
@@ -62,7 +62,7 @@ public class Player : MonoBehaviour
         playerFsm = GetComponent<PlayerFSM>();
         playerFsm.ChangeState(new IdleState(this));
 
-        attackEvent = GetComponent<AttackEvent>();
+        animationEvent = GetComponent<AnimationEvent>();
     }
 
     // Update is called once per frame
@@ -237,7 +237,6 @@ public class Player : MonoBehaviour
         return false;
     }
 
-
     public void SetFreezePositionY(bool enable)
     {
         if (enable)
@@ -306,6 +305,6 @@ public class Player : MonoBehaviour
 
     public void TrailOff()
     {
-        attackEvent.DisableTrail();
+        animationEvent.DisableTrail();
     }
 }
